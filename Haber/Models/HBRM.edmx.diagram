@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a50af17eda654b9fb72642b9de5d2cb5" Name="Diagram1">
+        <EntityTypeShape EntityType="HaberModel.Haberlerim" Width="1.5" PointX="5" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HaberModel.Kategori" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HaberModel.Yazar" Width="1.5" PointX="3.125" PointY="4.625" IsExpanded="true" />
+        <AssociationConnector Association="HaberModel.FK_Haberlerim_Tokategorim" ManuallyRouted="false" />
+        <AssociationConnector Association="HaberModel.FK_Haberlerim_Toyazarim" ManuallyRouted="false" />
+        <AssociationConnector Association="HaberModel.FK_Yazar_ToKategori" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HaberModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Haberlerim">
+          <Key>
+            <PropertyRef Name="Hbrid" />
+          </Key>
+          <Property Name="Hbrid" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Haberbaslik" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="haberadi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Haberkategori" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="habericeriği" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="haberyazari" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="habertarihi" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="kategoriid" />
+          </Key>
+          <Property Name="kategoriid" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Kategoriadı" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Yazar">
+          <Key>
+            <PropertyRef Name="Yazarid" />
+          </Key>
+          <Property Name="Yazarid" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="adsoyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="kayittarih" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="yas" Type="int" Nullable="false" />
+          <Property Name="yazarbrans" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sifre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="eposta" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Haberlerim_Tokategorim">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="1" />
+          <End Role="Haberlerim" Type="Self.Haberlerim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="kategoriid" />
+            </Principal>
+            <Dependent Role="Haberlerim">
+              <PropertyRef Name="Haberkategori" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Haberlerim_Toyazarim">
+          <End Role="Yazar" Type="Self.Yazar" Multiplicity="1" />
+          <End Role="Haberlerim" Type="Self.Haberlerim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Yazar">
+              <PropertyRef Name="Yazarid" />
+            </Principal>
+            <Dependent Role="Haberlerim">
+              <PropertyRef Name="haberyazari" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Yazar_ToKategori">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="1" />
+          <End Role="Yazar" Type="Self.Yazar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="kategoriid" />
+            </Principal>
+            <Dependent Role="Yazar">
+              <PropertyRef Name="yazarbrans" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HaberModelStoreContainer">
+          <EntitySet Name="Haberlerim" EntityType="Self.Haberlerim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Yazar" EntityType="Self.Yazar" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Haberlerim_Tokategorim" Association="Self.FK_Haberlerim_Tokategorim">
+            <End Role="Kategori" EntitySet="Kategori" />
+            <End Role="Haberlerim" EntitySet="Haberlerim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Haberlerim_Toyazarim" Association="Self.FK_Haberlerim_Toyazarim">
+            <End Role="Yazar" EntitySet="Yazar" />
+            <End Role="Haberlerim" EntitySet="Haberlerim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Yazar_ToKategori" Association="Self.FK_Yazar_ToKategori">
+            <End Role="Kategori" EntitySet="Kategori" />
+            <End Role="Yazar" EntitySet="Yazar" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HaberModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Haberlerim">
+          <Key>
+            <PropertyRef Name="Hbrid" />
+          </Key>
+          <Property Name="Hbrid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Haberbaslik" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="haberadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Haberkategori" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="habericeriği" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="haberyazari" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="habertarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Kategori" Relationship="Self.FK_Haberlerim_Tokategorim" FromRole="Haberlerim" ToRole="Kategori" />
+          <NavigationProperty Name="Yazar" Relationship="Self.FK_Haberlerim_Toyazarim" FromRole="Haberlerim" ToRole="Yazar" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="kategoriid" />
+          </Key>
+          <Property Name="kategoriid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Kategoriadı" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Haberlerim" Relationship="Self.FK_Haberlerim_Tokategorim" FromRole="Kategori" ToRole="Haberlerim" />
+          <NavigationProperty Name="Yazar" Relationship="Self.FK_Yazar_ToKategori" FromRole="Kategori" ToRole="Yazar" />
+        </EntityType>
+        <EntityType Name="Yazar">
+          <Key>
+            <PropertyRef Name="Yazarid" />
+          </Key>
+          <Property Name="Yazarid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="adsoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="kayittarih" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="yas" Type="Int32" Nullable="false" />
+          <Property Name="yazarbrans" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="eposta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Haberlerim" Relationship="Self.FK_Haberlerim_Toyazarim" FromRole="Yazar" ToRole="Haberlerim" />
+          <NavigationProperty Name="Kategori" Relationship="Self.FK_Yazar_ToKategori" FromRole="Yazar" ToRole="Kategori" />
+        </EntityType>
+        <Association Name="FK_Haberlerim_Tokategorim">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="1" />
+          <End Role="Haberlerim" Type="Self.Haberlerim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="kategoriid" />
+            </Principal>
+            <Dependent Role="Haberlerim">
+              <PropertyRef Name="Haberkategori" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Haberlerim_Toyazarim">
+          <End Role="Yazar" Type="Self.Yazar" Multiplicity="1" />
+          <End Role="Haberlerim" Type="Self.Haberlerim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Yazar">
+              <PropertyRef Name="Yazarid" />
+            </Principal>
+            <Dependent Role="Haberlerim">
+              <PropertyRef Name="haberyazari" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Yazar_ToKategori">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="1" />
+          <End Role="Yazar" Type="Self.Yazar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="kategoriid" />
+            </Principal>
+            <Dependent Role="Yazar">
+              <PropertyRef Name="yazarbrans" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HaberEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Haberlerim" EntityType="Self.Haberlerim" />
+          <EntitySet Name="Kategori" EntityType="Self.Kategori" />
+          <EntitySet Name="Yazar" EntityType="Self.Yazar" />
+          <AssociationSet Name="FK_Haberlerim_Tokategorim" Association="Self.FK_Haberlerim_Tokategorim">
+            <End Role="Kategori" EntitySet="Kategori" />
+            <End Role="Haberlerim" EntitySet="Haberlerim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Haberlerim_Toyazarim" Association="Self.FK_Haberlerim_Toyazarim">
+            <End Role="Yazar" EntitySet="Yazar" />
+            <End Role="Haberlerim" EntitySet="Haberlerim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Yazar_ToKategori" Association="Self.FK_Yazar_ToKategori">
+            <End Role="Kategori" EntitySet="Kategori" />
+            <End Role="Yazar" EntitySet="Yazar" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HaberModelStoreContainer" CdmEntityContainer="HaberEntities1">
+          <EntitySetMapping Name="Haberlerim">
+            <EntityTypeMapping TypeName="HaberModel.Haberlerim">
+              <MappingFragment StoreEntitySet="Haberlerim">
+                <ScalarProperty Name="Hbrid" ColumnName="Hbrid" />
+                <ScalarProperty Name="Haberbaslik" ColumnName="Haberbaslik" />
+                <ScalarProperty Name="haberadi" ColumnName="haberadi" />
+                <ScalarProperty Name="Haberkategori" ColumnName="Haberkategori" />
+                <ScalarProperty Name="habericeriği" ColumnName="habericeriği" />
+                <ScalarProperty Name="haberyazari" ColumnName="haberyazari" />
+                <ScalarProperty Name="habertarihi" ColumnName="habertarihi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategori">
+            <EntityTypeMapping TypeName="HaberModel.Kategori">
+              <MappingFragment StoreEntitySet="Kategori">
+                <ScalarProperty Name="kategoriid" ColumnName="kategoriid" />
+                <ScalarProperty Name="Kategoriadı" ColumnName="Kategoriadı" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Yazar">
+            <EntityTypeMapping TypeName="HaberModel.Yazar">
+              <MappingFragment StoreEntitySet="Yazar">
+                <ScalarProperty Name="Yazarid" ColumnName="Yazarid" />
+                <ScalarProperty Name="adsoyad" ColumnName="adsoyad" />
+                <ScalarProperty Name="kayittarih" ColumnName="kayittarih" />
+                <ScalarProperty Name="yas" ColumnName="yas" />
+                <ScalarProperty Name="yazarbrans" ColumnName="yazarbrans" />
+                <ScalarProperty Name="sifre" ColumnName="sifre" />
+                <ScalarProperty Name="eposta" ColumnName="eposta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
